@@ -1,7 +1,7 @@
 # You can use this file to define resource usage estimates for Infracost to use when calculating
 # the cost of usage-based resource, such as AWS S3 or Lambda.
 # `infracost breakdown --usage-file infracost-usage.yml [other flags]`
-# See https://github.com/ashu-2711/Demo.git for docs
+# See https://infracost.io/usage-file/ for docs
 version: 0.1
 resource_usage:
   #
@@ -475,3 +475,479 @@ resource_usage:
       asia: 1500           # Asia excluding China, but including Hong Kong.
       china: 50            # China excluding Hong Kong.
       australia: 250       # Australia.
+
+  google_compute_external_vpn_gateway.my_compute_external_vpn_gateway:
+    monthly_egress_data_transfer_gb:  # Monthly data transfer from VPN gateway to the following, in GB:
+      worldwide: 12500                # Worldwide excluding China, Australia but including Hong Kong.
+      china: 8500                     # China excluding Hong Kong.
+      australia: 250                  # Australia.
+  
+  google_compute_vpn_gateway.my_compute_vpn_gateway:
+    monthly_egress_data_transfer_gb:  # Monthly VM-VM data transfer from VPN gateway to the following, in GB:
+      same_region: 250                # VMs in the same Google Cloud region.
+      us_or_canada: 100               # From a Google Cloud region in the US or Canada to another Google Cloud region in the US or Canada.
+      europe: 70                      # Between Google Cloud regions within Europe.
+      asia: 50                        # Between Google Cloud regions within Asia.
+      south_america: 100              # Between Google Cloud regions within South America.
+      oceania: 50                     # Indonesia and Oceania to/from any Google Cloud region.
+      worldwide: 200                  # to a Google Cloud region on another continent.
+    
+  google_compute_ha_vpn_gateway.my_compute_ha_vpn_gateway:
+    monthly_egress_data_transfer_gb:  # Monthly VM-VM data transfer from VPN gateway to the following, in GB:
+      same_region: 250                # VMs in the same Google Cloud region.
+      us_or_canada: 100               # From a Google Cloud region in the US or Canada to another Google Cloud region in the US or Canada.
+      europe: 70                      # Between Google Cloud regions within Europe.
+      asia: 50                        # Between Google Cloud regions within Asia.
+      south_america: 100              # Between Google Cloud regions within South America.
+      oceania: 50                     # Indonesia and Oceania to/from any Google Cloud region.
+      worldwide: 200                  # to a Google Cloud region on another continent.
+
+  google_compute_forwarding_rule.my_forwarding:
+    monthly_ingress_data_gb: 100
+  
+  google_compute_global_forwarding_rule.my_global_forwarding:
+    monthly_ingress_data_gb: 100
+
+  google_compute_image.my_image:
+    storage_gb: 1000 # Total size of image storage in GB.
+
+  google_compute_machine_image.my_machine_image:
+    storage_gb: 1000 # Total size of machine image storage in GB.
+
+  google_compute_snapshot.my_snapshot:
+    storage_gb: 500 # Total size of snapshot disk storage in GB.
+
+  google_compute_target_grpc_proxy.my_proxy:
+    monthly_proxy_instances: 10.2
+    monthly_data_processed_gb: 100
+
+  google_compute_target_http_proxy.my_proxy:
+    monthly_proxy_instances: 10.2
+    monthly_data_processed_gb: 100
+     
+  google_compute_target_https_proxy.my_proxy:
+    monthly_proxy_instances: 10.2
+    monthly_data_processed_gb: 100
+
+  google_compute_target_ssl_proxy.my_proxy:
+    monthly_proxy_instances: 10.2
+    monthly_data_processed_gb: 100
+
+  google_compute_target_tcp_proxy.my_proxy:
+    monthly_proxy_instances: 10.2
+    monthly_data_processed_gb: 100
+   
+  google_compute_region_target_http_proxy.my_proxy:
+    monthly_proxy_instances: 10.2
+    monthly_data_processed_gb: 100
+
+  google_compute_region_target_https_proxy.my_proxy:
+    monthly_proxy_instances: 10.2
+    monthly_data_processed_gb: 100
+
+  google_dns_record_set.my_record_set:
+    monthly_queries:  1000000 # Monthly DNS queries.
+
+  google_kms_crypto_key.my_keys:
+    key_versions: 10000             # Number of key versions.
+    monthly_key_operations: 1000000 # Monthly number of key operations.
+
+  google_logging_billing_account_bucket_config.my_config:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_logging_billing_account_sink.my_sink:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_logging_folder_bucket_config.my_config:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_logging_folder_sink.my_sink:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_logging_organization_bucket_config.my.config:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_logging_organization_sink.my_sink:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_logging_project_bucket_config.my_config:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_logging_project_sink.my_sink:
+    monthly_logging_data_gb: 100  # Monthly logging data in GB.
+
+  google_monitoring_metric_descriptor.my_monitoring:
+    monthly_monitoring_data_mb: 5000 # Monthly monitoring data in MB (only for chargeable metrics).
+    monthly_api_calls: 1000000       # Monthly read API calls (write calls are free).
+
+  google_pubsub_subscription.my_subscription:
+    monthly_message_data_tb: 7.416 # Monthly amount of message data pulled by the subscription in TB.
+    storage_gb: 605                # Storage for retaining acknowledged messages in GB.
+    snapshot_storage_gb: 70.6      # Snapshot storage for unacknowledged messages in GB.
+
+  google_pubsub_topic.my_topic:
+    monthly_message_data_tb: 7.416 # Monthly amount of message data published to the topic in TB.
+
+  google_secret_manager_secret.my_secret:
+    active_secret_versions: 10000       # Number of active secret versions in each month. NOTE: this is used only when secret versions are not defined.
+    monthly_access_operations: 20000    # Monthly number of access operations
+    monthly_rotation_notifications: 100 # Monthly number of rotation notifications
+
+  google_secret_manager_secret_version.my_secret_version:
+    monthly_access_operations: 25000 # Monthly number of access operations
+
+  google_sql_database_instance.my_instance:
+    backup_storage_gb: 1000 # Amount of backup storage in GB.
+
+  google_storage_bucket.my_storage_bucket:
+    storage_gb: 150                   # Total size of bucket in GB.
+    monthly_class_a_operations: 40000 # Monthly number of class A operations (object adds, bucket/object list).
+    monthly_class_b_operations: 20000 # Monthly number of class B operations (object gets, retrieve bucket/object metadata).
+    monthly_data_retrieval_gb: 500    # Monthly amount of data retrieved in GB.
+    monthly_egress_data_transfer_gb:  # Monthly data transfer from Cloud Storage to the following, in GB:
+      same_continent: 550  # Same continent.
+      worldwide: 12500     # Worldwide excluding Asia, Australia.
+      asia: 1500           # Asia excluding China, but including Hong Kong.
+      china: 50            # China excluding Hong Kong.
+      australia: 250       # Australia.
+
+  #
+  # Terraform AzureRM resources
+  #
+  azurerm_api_management.my_api_management:
+    monthly_api_calls: 10000000 # Monthly number of api calls (only for consumption tier).
+    self_hosted_gateway_count: 5 # Number of self-hosted gateways (only for premium tier).
+
+  azurerm_app_service_environment.my_service:
+     operating_system: linux # Override the operating system of the instance, can be: linux, windows.
+
+  azurerm_application_insights.my_insights:
+    monthly_data_ingested_gb: 1000 # Monthly amount of data ingested in GB.
+
+  azurerm_automation_account.my_account:
+    non_azure_config_node_count: 2 # Number of non-Azure configuration nodes.
+    monthly_watcher_hours: 0 # Monthly number of watcher hours.
+    monthly_job_run_mins: 5 # Monthly number of job run minutes.
+
+  azurerm_automation_dsc_configuration.my_configuration:
+    non_azure_config_node_count: 0 # Number of non-Azure configuration nodes.
+
+  azurerm_automation_dsc_nodeconfiguration.my_nodeconfiguration:
+    non_azure_config_node_count: 0 # Number of non-Azure configuration nodes.
+
+  azurerm_application_gateway.my_gateway: 
+    monthly_data_processed_gb: 100000 #  Monthly data processed by the Application Gateway in GB.
+    monthly_v2_capacity_units: 10000  # Number capacity(for v2) units gateway.
+
+  azurerm_automation_job_schedule.my_schedule:
+    monthly_job_run_mins: 0 # Monthly number of job run minutes.  
+  
+  azurerm_bastion_host.my_bastion_host:
+    monthly_outbound_data_gb: 100000 # Monthly outbound data in GB.
+
+  azurerm_databricks_workspace.my_workspace:
+    monthly_all_purpose_compute_dbu_hrs: 500 # Monthly number of All-purpose Compute Databricks Units in DBU-hours.
+    monthly_jobs_compute_dbu_hrs: 1000 # Monthly number of Jobs Compute Databricks Units in DBU-hours.
+    monthly_jobs_light_compute_dbu_hrs: 2000 # Monthly number of Jobs Light Compute Databricks Units in DBU-hours.
+  
+  azurerm_function_app.my_functions:
+    monthly_executions: 100000 # Monthly executions to the function. Only applicable for Consumption plan.
+    execution_duration_ms: 500 # Average duration of each execution in milliseconds. Only applicable for Consumption plan.
+    memory_mb: 128             # Average amount of memory consumed by function in MB. Only applicable for Consumption plan.
+    instances: 1               # Number of instances. Only applicable for Premium plan.
+  
+  azurerm_cdn_endpoint.my_endpoint:
+    monthly_outbound_gb: 1000000 # Monthly number of outbound data transfers in GB.
+    monthly_rules_engine_requests: 10000000 # Monthly number of rules engine requests.
+
+  azurerm_cosmosdb_cassandra_keyspace.my_cassandra_keyspace:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_cassandra_table.my_cassandra_table:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_gremlin_database.my_gremlin_database:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_gremlin_graph.my_gremlin_graph:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_mongo_collection.my_mongo_collection:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_mongo_database.my_mongo_database:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_sql_container.my_sql_container:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_sql_database.my_sql_database:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+
+  azurerm_cosmosdb_table.my_table:
+    storage_gb: 1000 # Total size of storage in GB.
+    monthly_serverless_request_units: 10000000 # Monthly number of serverless request units.
+    monthly_restored_data_gb: 3000 # Monthly total amount of point-in-time restore data in GB.
+    monthly_analytical_storage_write_operations: 1000000 # Monthly number of write analytical storage operations.
+    monthly_analytical_storage_read_operations: 1000000 # Monthly number of read analytical storage operations.
+    max_request_units_utilization_percentage: 50 # Average utilisation of the maximum RU/s, starting at 10%. Possible values from 10 to 100.
+  
+  azurerm_dns_a_record.my_a_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+  
+  azurerm_dns_aaaa_record.my_aaaa_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+  
+  azurerm_dns_caa_record.my_caa_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_dns_cname_record.my_cname_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_dns_mx_record.my_mx_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_dns_ns_record.my_ns_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_dns_ptr_record.my_ptr_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_dns_srv_record.my_srv_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+    
+  azurerm_dns_txt_record.my_txt_record:
+    monthly_queries: 11500000000  # Monthly number of DNS queries
+
+  azurerm_eventhub_namespace.my_event_hub:
+    monthly_ingress_events: 100000000 # Monthly number of ingress events, only applicable for Basic and Standard namespaces.
+    retention_storage_gb: 10000       # Total data stored for retention in GB, used to calculate Extended Retention costs, only applicable for Dedicated namespaces.
+    throughput_or_capacity_units: 10  # Number of Throughput Units (for Basic and Standard) and Capacity units (for Dedicated) namespaces.
+    capture_enabled: false            # Defines if capture is enabled for the Event Hub Standard namespaces, can be: true, false.
+
+  azurerm_frontdoor.my_frontdoor:
+    monthly_outbound_data_transfer_gb: # Monthly outbound data transfer from the following, in GB:
+      us_gov: 190000                       # US Gov
+      north_america_europe_africa: 200000  # North America, Europe and Africa
+      asia_pacific: 220000                 # Asia Pacific (including Japan)
+      south_america: 10000                 # South America
+      australia: 50000                     # Australia
+      india: 387000                        # India
+    monthly_inbound_data_transfer_gb: 1000 # Monthly inbound data transfer in GB
+
+  azurerm_frontdoor_firewall_policy.my_frontdoor_firewall_policy:
+    monthly_custom_rule_requests: 11000     # Monthly number of custom rule requests
+    monthly_managed_ruleset_requests: 10000 # Monthly number of managed ruleset requests
+
+  azurerm_kubernetes_cluster.my_cluster:
+    load_balancer:
+      monthly_data_processed_gb: 100 # Monthly inbound and outbound data processed in GB.
+
+    default_node_pool:
+      nodes: 2 # Node count for the default node pool.
+
+  azurerm_kubernetes_cluster_node_pool.my_node_pool:
+    nodes: 3 # Node count for the node pool.
+  
+  azurerm_container_registry.my_registry:
+    storage_gb: 150 
+    monthly_build_vcpu_hrs: 150 
+
+  azurerm_hdinsight_kafka_cluster.my_cluster:
+    monthly_os_disk_operations: 1000000 # Average number of disk operations (writes, reads, deletes) using a unit size of 256KiB per OS disk per month.
+
+  azurerm_firewall.my_firewall:
+    monthly_data_processed_gb: 100000 # Monthly data processed by the firewall in GB.
+
+  azurerm_linux_virtual_machine.my_linux_vm:
+    os_disk:
+      monthly_disk_operations: 2000000 # Number of disk operations (writes, reads, deletes) using a unit size of 256KiB.
+
+  azurerm_key_vault_certificate.my_certificate:
+    monthly_certificate_renewal_requests: 100    # Monthly number of certificate renewal requests.
+    monthly_certificate_other_operations: 100000 # Monthly number of non-renewal certificate operations.
+
+  azurerm_key_vault_key.my_keys:
+    monthly_secrets_operations: 10000          # Monthly number of secrets transactions.
+    monthly_key_rotation_renewals: 50          # Monthly number of Managed Azure Storage account key rotation renewals.
+    monthly_protected_keys_operations: 1000000 # Monthly number of Software or HSM transactions.
+    hsm_protected_keys: 3000                   # Number of protected keys.
+
+  azurerm_linux_virtual_machine_scale_set.standard_f2:
+    instances: 10 # Override the number of instances in the scale set.
+    os_disk:
+      monthly_disk_operations: 2000000 # Number of disk operations (writes, reads, deletes) using a unit size of 256KiB per instance in the scale set.
+
+  azurerm_lb.my_lb:
+    monthly_data_processed_gb: 100 # Monthly inbound and outbound data processed in GB.
+
+  azurerm_managed_disk.my_disk:
+    monthly_disk_operations: 2000000 # Number of disk operations (writes, reads, deletes) using a unit size of 256KiB.
+
+  azurerm_mariadb_server.my_server:
+    additional_backup_storage_gb: 2000 # Additional consumption of backup storage in GB.
+
+  azurerm_mssql_database.my_database:
+    monthly_vcore_hours: 600             # Monthly number of used vCore-hours for serverless compute.
+    long_term_retention_storage_gb: 1000 # Number of GBs used by long-term retention backup storage.
+    extra_data_storage_gb: 250           # Override number of GBs used by extra data storage.
+
+  azurerm_mysql_server.my_server:
+    additional_backup_storage_gb: 2000 # Additional consumption of backup storage in GB.
+
+  azurerm_nat_gateway.my_gateway:
+    monthly_data_processed_gb: 10 # Monthly data processed by the NAT Gateway in GB.
+
+  azurerm_point_to_site_vpn_gateway.my_point_to_site_gateway:
+    monthly_p2s_connections_hrs: 2000 # Monthly connection hours to the point to site gateway
+
+  azurerm_postgresql_flexible_server.my_flexible_server:
+    additional_backup_storage_gb: 5000 # Additional consumption of backup storage in GB.
+
+  azurerm_postgresql_server.my_server:
+    additional_backup_storage_gb: 3000 # Additional consumption of backup storage in GB.
+
+  azurerm_private_dns_a_record.my_a_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+  
+  azurerm_private_dns_aaaa_record.my_aaaa_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+  
+  azurerm_private_dns_cname_record.my_cname_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_private_dns_mx_record.my_mx_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_private_dns_ptr_record.my_ptr_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_private_dns_srv_record.my_srv_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+    
+  azurerm_private_dns_txt_record.my_txt_record:
+    monthly_queries: 1500000000  # Monthly number of DNS queries
+
+  azurerm_private_endpoint.with_inbound:
+    monthly_inbound_data_processed_gb: 100 # Monthly inbound data processed in GB.
+    monthly_outbound_data_processed_gb: 100 # Monthly outbound data processed in GB.
+
+  azurerm_search_service.my_service:
+    monthly_images_extracted: 1000000 # Monthly number of extracted images
+
+  azurerm_storage_account.my_account:
+    data_at_rest_storage_gb: 10000                        # Total size of Data at Rest in GB (File storage).
+    early_deletion_gb: 1000                               # Total size of Early deletion data in GB.
+    snapshots_storage_gb: 10000                           # Total size of Snapshots in GB (File storage).
+    metadata_at_rest_storage_gb: 10000                    # Total size of Metadata in GB (File storage).
+    storage_gb: 1000000                                   # Total size of storage in GB.
+    monthly_iterative_write_operations: 170000            # Monthly number of Iterative write operations (GPv2).
+    monthly_write_operations: 1000000                     # Monthly number of Write operations.
+    monthly_list_and_create_container_operations: 1000000 # Monthly number of List and Create Container operations.
+    monthly_iterative_read_operations: 150000             # Monthly number of Iterative read operations (GPv2).
+    monthly_read_operations: 100000                       # Monthly number of Read operations.
+    monthly_other_operations: 1000000                     # Monthly number of All other operations.
+    monthly_data_retrieval_gb: 1000                       # Monthly number of data retrieval in GB.
+    monthly_data_write_gb: 1000                           # Monthly number of data write in GB.
+    blob_index_tags: 100000                               # Total number of Blob indexes.
+
+  azurerm_sql_database.my_database:
+    monthly_vcore_hours: 600             # Monthly number of used vCore-hours for serverless compute.
+    long_term_retention_storage_gb: 1000 # Number of GBs used by long-term retention backup storage.
+    extra_data_storage_gb: 250           # Override number of GBs used by extra data storage.
+
+  azurerm_synapse_spark_pool.my_spark_pool:
+    monthly_hours: 730 # Monthly number of hours used by each instance in the pool.
+
+  azurerm_synapse_sql_pool.my_sql_pool:
+    storage_tb: 1 # Total storage size, including snapshots, in TB.
+    disaster_recovery_enabled: false # Whether geo-redundant disaster recovery is enabled or not.
+
+  azurerm_synapse_workspace.my_workspace:
+    serverless_sql_pool_size_tb: 10 # Total storage size, including snapshots, in TB.
+    monthly_datapipeline_azure_hosted_activity_runs: 3 # Monthly number of Azure hosted activity runs.
+    monthly_datapipeline_azure_hosted_data_integration_units: 1 # Monthly number of Azure hosted data integration units.
+    monthly_datapipeline_azure_hosted_data_integration_hours: 31 # Monthly number of Azure hosted data integration hours.
+    monthly_datapipeline_azure_hosted_integration_runtime_hours: 200 # Monthly number of Azure hosted integration runtime hours.
+    monthly_datapipeline_azure_hosted_external_integration_runtime_hours: 4000 # Monthly number of Azure hosted external integration runtime hours.
+    monthly_datapipeline_self_hosted_activity_runs: 1 # Monthly number of self hosted activity runs.
+    monthly_datapipeline_self_hosted_data_movement_hours: 10 # Monthly number of self hosted data movement hours.
+    monthly_datapipeline_self_hosted_integration_runtime_hours: 200 # Monthly number of self hosted integration runtime hours.
+    monthly_datapipeline_self_hosted_external_integration_runtime_hours: 4000 # Monthly number of self hosted external integration runtime hours.
+    dataflow_basic_instances: 1 # Number of Data Flow basic instances.
+    dataflow_basic_vcores: 8 # Number of Data Flow basic vCores.
+    monthly_dataflow_basic_hours: 1 # Monthly number of Data Flow basic hours (this is multiplied by the number of instances and vCores).
+    dataflow_standard_instances: 1 # Number of Data Flow standard instances.
+    dataflow_standard_vcores: 12 # Number of Data Flow standard vCores.
+    monthly_dataflow_standard_hours: 1 # Monthly number of Data Flow standard hours (this is multiplied by the number of instances and vCores).
+
+  azurerm_virtual_hub.my_virtual_hub:
+    monthly_data_processed_gb: 10 # Monthly data processed by the Virtual WAN Hub in GB
+
+  azurerm_virtual_machine_scale_set.my_scale_set:
+    storage_profile_os_disk:
+      monthly_disk_operations: 100000 # Monthly number of main disk operations (writes, reads, deletes) using a unit size of 256KiB.
+    storage_profile_data_disk:
+      monthly_disk_operations: 100000 # Monthly number of disk operations (writes, reads, deletes) using a unit size of 256KiB per additional disk.
+
+  azurerm_virtual_machine.my_vm:
+    storage_os_disk:
+      monthly_disk_operations: 100000 # Monthly number of main disk operations (writes, reads, deletes) using a unit size of 256KiB.
+    storage_data_disk:
+      monthly_disk_operations: 100000 # Monthly number of disk operations (writes, reads, deletes) using a unit size of 256KiB per additional disk.
+
+  azurerm_windows_virtual_machine.my_windows_vm:
+    os_disk:
+      monthly_disk_operations: 2000000 # Number of disk operations (writes, reads, deletes) using a unit size of 256KiB.
+
+  azurerm_windows_virtual_machine_scale_set.basic_a2:
+    instances: 10 # Override the number of instances in the scale set.
+    os_disk:
+      monthly_disk_operations: 2000000 # Number of disk operations (writes, reads, deletes) using a unit size of 256KiB per instance in the scale set.
+
+  azurerm_notification_hub_namespace.my_namespace:
+    monthly_pushes: 1000000 # Monthly total number number of additional pushes.
+
+  azurerm_virtual_network_gateway.Basic:
+    p2s_connection: 150 # Total number of p2s tunnels.
+    monthly_data_transfer_gb: 1 # Monthly data transfer in GB.
