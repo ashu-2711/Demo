@@ -1,7 +1,7 @@
 # You can use this file to define resource usage estimates for Infracost to use when calculating
 # the cost of usage-based resource, such as AWS S3 or Lambda.
 # `infracost breakdown --usage-file infracost-usage.yml [other flags]`
-# See https://infracost.io/usage-file/ for docs
+# See https://github.com/ashu-2711/Demo.git for docs
 version: 0.1
 resource_usage:
   #
